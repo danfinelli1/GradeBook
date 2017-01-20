@@ -1,0 +1,9 @@
+<%= form_for @assignment, url: '/assignment', method: "post" do |f| %>
+  <div>
+    <%= f.text_field :name, placeholder: "Assignment Name" %>
+  </div>
+  <div>
+    <%= f.hidden_field :course_id, :value => @course.id %>
+  </div>
+  <%= f.submit "Create Assignment!" %>
+<% end %>

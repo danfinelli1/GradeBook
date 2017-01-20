@@ -1,0 +1,14 @@
+<h1>Tell Us More!</h1>
+<br>
+<%= form_for @student, url: "/student", method: "post" do |f| %>
+  <div>
+    <%= f.text_field :first_name, placeholder: "First Name" %>
+  </div>
+  <div>
+    <%= f.text_field :last_name, placeholder: "Last Name" %>
+  </div>
+  <div>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+  </div>
+  <%= f.submit "Create Account!" %>
+<% end %>

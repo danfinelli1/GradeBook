@@ -1,3 +1,10 @@
 <div>
-  Welcome, <%= @user %>!
+  Welcome, <%= @student.first_name %>!
 </div>
+Pick your courses:
+<%= form_for @my_courses, do |f| %>
+<% @courses.each do |course|%>
+  <%= f.select :course_id, ["#{course.name}"] %>
+  <%= f.submit "Add" %>
+<%end%>
+<%end%>

@@ -6,11 +6,22 @@ class UsersController < ApplicationController
   def create
     @user = User.create(user_params)
     login(@user)
-    redirect_to @user
+    if @user.access_level == "Teacher"
+      redirect_to new_teacher_path
+    elsif @user.access_level == "Student"
+      redirect_to new_student_path
+    end
+
   end
 
   def show
     @user = User.find_by_id(params[:id])
+  end
+
+  def destroy
+    delete_user = User.find_by_id(current_user.id)
+    User.destroy(delete_user)
+    redirect_to root_path
   end
 
 

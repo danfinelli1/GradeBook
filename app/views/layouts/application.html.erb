@@ -9,10 +9,14 @@
   </head>
 
   <body>
-
     <% if current_user %>
-      <%= link_to "Profile", user_path(current_user) %>
-      <%= link_to "Log Out", logout_path %>
+      <% if current_user.access_level == "Teacher" %>
+        <%= link_to "Profile", teacher_profile_path %>
+        <%= link_to "Log Out", logout_path %>
+      <% elsif current_user.access_level == "Student" %>
+        <%= link_to "Profile", student_profile_path %>
+        <%= link_to "Log Out", logout_path %>
+      <%end%>
     <% else %>
       <%= link_to "Create Account", new_user_path %>
       <%= link_to "Log In", login_path %>
