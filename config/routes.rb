@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get '/student/profile', to: 'students#show', as: 'student_profile'
   get '/student/new', to: 'students#new', as: 'new_student'
   post '/student', to: 'students#create'
+  get '/students', to: 'students#index', as: 'all_students'
 
   get '/login', to: 'sessions#new'
   get '/logout', to: 'sessions#destroy'

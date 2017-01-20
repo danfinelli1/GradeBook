@@ -1,5 +1,10 @@
 class StudentsController < ApplicationController
 
+  def index
+    @students = Student.search(params[:first_name])
+    redirect_to student_profile_path
+  end
+
   def new
     @student = Student.new
   end
@@ -13,7 +18,7 @@ class StudentsController < ApplicationController
     @user = User.find_by_id(current_user.id)
     @student = Student.find_by(user_id:current_user.id)
     @courses = Course.all
-    @my_courses = []
+    # @my_courses = Course.where(Enrollment.find_by(student_id:@student.id))
   end
 
 

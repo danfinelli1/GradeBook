@@ -18,6 +18,7 @@ class CoursesController < ApplicationController
   end
 
   def show
+    @students = Student.all
     @course = Course.find_by_id(params[:id])
     @assignments = Assignment.where(course_id:@course.id)
   end

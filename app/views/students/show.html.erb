@@ -2,9 +2,9 @@
   Welcome, <%= @student.first_name %>!
 </div>
 Pick your courses:
-<%= form_for @my_courses, do |f| %>
+<select>
 <% @courses.each do |course|%>
-  <%= f.select :course_id, ["#{course.name}"] %>
-  <%= f.submit "Add" %>
+  <option><%=course.name%></option>
+  <%= course.name+course.number.to_s%>
 <%end%>
-<%end%>
+</select>

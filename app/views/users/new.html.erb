@@ -5,9 +5,16 @@
   <div>
     <%= f.password_field :password, placeholder: "Password" %>
   </div>
+  <div class="input-field col s12">
+    <%= f.select :access_level, ["Student", "Teacher"]%>
+<label>Access Level</label>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+  $('select').material_select();
+});
+</script>
   <div>
-    <%= f.select :access_level, ['Student','Teacher'] %>
+    <%= f.submit "Sign Up", class:"waves-effect waves-light btn" %>
   </div>
-
-    <%= f.submit "Sign Up" %>
 <% end %>
