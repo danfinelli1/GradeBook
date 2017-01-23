@@ -19,8 +19,10 @@ class AssignmentsController < ApplicationController
       @list_students = []
       @course = Course.find_by_id(params[:course_id])
       @students = Student.all
+
       @enrolled = Enrollment.where(course_id:params[:course_id])
       @enrolled_students = []
+      #assess the enrollment jointable and returns array of students taking the course
       @enrolled.each do |enroll|
         @enrolled_students.push(Student.where(id:enroll.student_id))
       end
@@ -33,9 +35,16 @@ class AssignmentsController < ApplicationController
     @course = Course.find_by_id(params[:course_id])
     @student_first = params[:enrollment][:student_picked].split(" ").first
     @student_last = params[:enrollment][:student_picked].split(" ").last
-    p "this be student first" + params[:enrollment][:student_picked]
     @student = Student.find_by(first_name:@student_first, last_name:@student_last)
     @enrollment = Enrollment.create(course_id:@course.id, student_id:@student.id)
+    redirect_to assignment_show_path
+  end
+
+  def remove_student_from_course
+    @course = Course.find_by_id(params[:course_id])
+    @student = Student.find(params[:remove_enrollment][:student_id])
+    p params[:remove_enrollment][:student_id]
+    @enrollment = Enrollment.delete(course_id:@course.id, student_id:@student.id)
     redirect_to assignment_show_path
   end
 

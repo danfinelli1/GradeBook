@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   get '/course/:course_id/assignment/:assignment_id', to: 'assignments#show', as: 'assignment_show'
 
   post '/course/:course_id/assignment/:assignment_id', to: 'assignments#add_student_to_course', as: 'create_enrollment'
-  patch '/course/:course_id/assignment/:assignment_id', to: 'assignments#remove_student_from_course'
+  delete '/course/:course_id/assignment/:assignment_id', to: 'assignments#remove_student_from_course', as: 'destroy_enrollment'
 
 
 end

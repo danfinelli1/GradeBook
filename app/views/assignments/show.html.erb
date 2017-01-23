@@ -5,7 +5,12 @@
 <%end%>
 <%@enrolled_students.each do |student|%>
   <%student.each do |g|%>
-  <%=g.first_name%>
+  <%= form_for :enrollment do |t|%>
+  <%=g.first_name%> <br>
+  <%= t.hidden_field :course_id, :value => @course.id%>
+  <%= t.hidden_field :student_id, :value => g.id%>
+  <%= t.button "Remove Student from Course", { :controller => :assignments, :action => :remove_student_from_course, :method => :delete}%>
+  <%end%>
   <%end%>
 <%end%>
 <br><br>Please select the students you want in this class!<br><br>
