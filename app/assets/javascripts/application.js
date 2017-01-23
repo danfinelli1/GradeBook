@@ -17,3 +17,6 @@
 //= require materialize-sprockets
 //= require materialize
 //= require materialize/extras/nouislider
+$(document).ready(function () {
+    $('select').material_select();
+});

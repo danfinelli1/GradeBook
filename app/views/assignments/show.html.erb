@@ -1,0 +1,16 @@
+<h1><%= @course.name%> </h1>
+<h5><%= @assignment.name%> </h5>
+<% @students.each do |student|%>
+  <% @list_students.push(student.first_name + " "+ student.last_name)%>
+<%end%>
+<%@enrolled_students.each do |student|%>
+  <%student.each do |g|%>
+  <%=g.first_name%>
+  <%end%>
+<%end%>
+<br><br>Please select the students you want in this class!<br><br>
+<%= form_for :enrollment do |f|%>
+  <%= f.select :student_picked,  @list_students%>
+  <%= f.hidden_field :course_id, :value => @course.id%>
+<%= f.button"Add Student to Course", { :controller => :assignments, :action => :add_student_to_course } %>
+<%end%>

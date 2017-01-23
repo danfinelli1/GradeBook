@@ -1,12 +1,6 @@
-<h1>made it</h1>
-<%= @course.name%> <br>
+<h1><%= @course.name%> </h1>
+<br>
 <% @assignments.each do |assignment| %>
-  <%=link_to("#{assignment.name}", assignment_show_path)%> <br>
+  <h5><%=link_to("#{assignment.name}", assignment_show_path({course_id:@course.id, assignment_id:assignment.id}))%> <br></h5>
 <% end %>
 <%= link_to("New Assignment", new_assignment_path, class:"waves-effect waves-light btn")%> <br>
-<%= form_tag all_students_path, :method => 'get' do %>
-  <p>
-    <%= text_field_tag :first_name, params[:first_name] %>
-    <%= submit_tag "Search", :first_name => nil, class:"waves-effect waves-light btn purple" %>
-  </p>
-<% end %>

@@ -21,9 +21,14 @@ class CoursesController < ApplicationController
     @students = Student.all
     @course = Course.find_by_id(params[:id])
     @assignments = Assignment.where(course_id:@course.id)
+    @enrollment = Enrollment.new
   end
 
 private
+
+  def enrollment_params
+    params.require(:enrollment).permit(:course_id, :student_id)
+  end
 
   def course_params
     params.require(:course).permit(:name, :number, :teacher_id)

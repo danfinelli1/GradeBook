@@ -5,7 +5,7 @@
 <h1>My Classes!</h1>
 <% @courses.each do |course| %>
 <div class="row">
-  <div class="col s12 m6">
+  <div class="col s12 m11">
     <div class="card blue-grey lighten-3">
       <div class="card-content white-text">
         <h5><%=link_to("#{course.name}", course_show_path(course.id)) %>
