@@ -16,9 +16,13 @@
       <tr>
         <td><%=student.id%></td>
         <td><%=student.first_name%> <%=student.last_name%></td>
-
+        <%@student_grade = Grade.find_by(student_id:student.id, assignment_id:@assignment.id)%>
         <td><%=form_for :add_grade, url: "/course/#{@course.id}/assignment/#{@assignment.id}/grade/#{student.id}" do |f| %>
-          <%=f.number_field :grade, :class => 'text_field', :step => 0.5, :placeholder => :grade%>
+          <%if @student_grade != nil%>
+            <%=f.number_field :grade, :class => 'text_field', :step => 0.5, :value => @student_grade.grade%>
+          <%else%>
+            <%=f.number_field :grade, :class => 'text_field', :step => 0.5, :value => 0%>
+          <%end%>
           <%=f.hidden_field :assignment_id, :value => @assignment.id %>
           <%=f.hidden_field :student_id, :value => student.id %>
           <%=f.button"Add", { :controller => :assignments, :action => 'add_grade_to_student', :class => 'waves-effect waves-light btn' }%>

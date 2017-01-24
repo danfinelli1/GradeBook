@@ -33,9 +33,9 @@ class AssignmentsController < ApplicationController
   def create
     @user = current_user
     @assignment = Assignment.create(assignment_params)
-    @course = Course.find_by_id(params[:id])
+    @course = Course.find_by_id(@assignment.course_id)
     if @user.access_level == "Teacher"
-      redirect_to teacher_profile_path
+      redirect_to course_show_path(@assignment.course_id)
     elsif @user.access_level == "Student"
       redirect_to new_student_path
     else
@@ -48,7 +48,7 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.find(params[:assignment_id])
     @student = Student.find(params[:add_grade][:student_id])
     @add_grade = Grade.create(grade:params[:add_grade][:grade], assignment_id:@assignment.id, student_id:@student.id)
-    redirect_to assignment_show_path
+    redirect_to assignment_show_path(course_id:@course.id, assignment_id:@assignment.id)
   end
 
 private
