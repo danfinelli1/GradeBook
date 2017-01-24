@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   post '/student', to: 'students#create'
   get '/student/edit', to: 'students#edit', as: 'edit_student'
   patch '/student/edit', to: 'students#update'
+  get '/student/:student_id/course/:course_id', to: 'students#course_show', as: 'student_show_course'
 
 #session routes
   get '/login', to: 'sessions#new'

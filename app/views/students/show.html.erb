@@ -1,10 +1,21 @@
 <div>
   Welcome, <%= @student.first_name %>!
 </div>
-These are your courses!:
-<%@enrolled_course.each do |course|%>
-  <br>
-  <h5><%=course.name%> <br></h5>
-
-
-<%end%>
+<br>
+<br>
+<table class="highlight">
+  <thead>
+    <tr>
+        <th data-field="name">Course Name</th>
+        <th data-field="grade">Avg Grade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%@enrolled_course.each do |course|%>
+      <tr>
+        <td><%=link_to "#{course.name}", student_show_course_path({course_id:"#{course.id}", student_id:@student.id})%></td>
+        <td><%=@avg_grade%></td>
+      </tr>
+      <%end%>
+  </tbody>
+</table>

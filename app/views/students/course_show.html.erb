@@ -1,0 +1,22 @@
+<br>
+<table class="highlight">
+  <thead>
+    <tr>
+        <th data-field="name">Assignment Name</th>
+        <th data-field="grade">Grade</th>
+    </tr>
+  </thead>
+  <tbody>
+<%@assignments.each do |assignment|%>
+    <tr>
+      <%@grade = Grade.where(assignment_id:assignment.id, student_id:@student.id)%>
+      <td><%=assignment.name%></td>
+      <%if @grade.last != nil && @grade.last.grade !=nil%>
+        <td><%=@grade.last.grade%></td>
+      <%else%>
+        <td>0</td>
+      <%end%>
+    </tr>
+<%end%>
+  </tbody>
+</table>

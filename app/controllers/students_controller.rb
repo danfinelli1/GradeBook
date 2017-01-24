@@ -1,7 +1,7 @@
 class StudentsController < ApplicationController
 
   def index
-    @students = Student.search(params[:first_name])
+    @students = Student.all
     redirect_to student_profile_path
   end
 
@@ -15,8 +15,8 @@ class StudentsController < ApplicationController
   end
 
   def show
-
     @enrolled_course = []
+    @assignments = []
     @user = User.find_by_id(current_user.id)
     @student = Student.find_by(user_id:current_user.id)
     @courses = Course.all
@@ -24,6 +24,13 @@ class StudentsController < ApplicationController
     @enrollment.each do |enroll|
       @enrolled_course.push(Course.find(enroll.course_id))
     end
+  end
+
+  def course_show
+    @student = Student.find_by(user_id:current_user.id)
+    @course = Course.find(params[:course_id])
+    @assignments = Assignment.where(course_id:params[:course_id])
+
   end
 
   def edit
