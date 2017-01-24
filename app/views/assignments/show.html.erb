@@ -3,14 +3,15 @@
 <% @students.each do |student|%>
   <% @list_students.push(student.first_name + " "+ student.last_name)%>
 <%end%>
+<p> THIS IS AN ACTIVE DOCUMENT </p>
 <%@enrolled_students.each do |student|%>
   <%student.each do |g|%>
-  <%= form_for :enrollment do |t|%>
-  <%=g.first_name%> <br>
-  <%= t.hidden_field :course_id, :value => @course.id%>
-  <%= t.hidden_field :student_id, :value => g.id%>
-  <%= t.button "Remove Student from Course", { :controller => :assignments, :action => :remove_student_from_course, :method => :delete}%>
-  <%end%>
+    <%= form_for :remove_enrollment, url:"/course/#{@course.id}/assignment/#{@assignment.id}", method: "delete" do |t|%>
+      <%=g.first_name%> <br>
+      <%= t.hidden_field :course_id, :value => @course.id%>
+      <%= t.hidden_field :student_id, :value => g.id%>
+      <%= t.button 'Remove Student from Course', { :controller => :assignments, :action => 'remove_student_from_course'} %>
+    <%end%>
   <%end%>
 <%end%>
 <br><br>Please select the students you want in this class!<br><br>

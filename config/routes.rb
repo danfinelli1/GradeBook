@@ -29,8 +29,8 @@ Rails.application.routes.draw do
   post '/assignment', to: 'assignments#create'
   get '/course/:course_id/assignment/:assignment_id', to: 'assignments#show', as: 'assignment_show'
 
-  post '/course/:course_id/assignment/:assignment_id', to: 'assignments#add_student_to_course', as: 'create_enrollment'
   delete '/course/:course_id/assignment/:assignment_id', to: 'assignments#remove_student_from_course', as: 'destroy_enrollment'
+  post '/course/:course_id/assignment/:assignment_id', to: 'assignments#add_student_to_course', as: 'create_enrollment'
 
 
 end
