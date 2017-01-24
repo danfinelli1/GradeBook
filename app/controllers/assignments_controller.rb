@@ -16,36 +16,18 @@ class AssignmentsController < ApplicationController
   def show
     if current_user.access_level == "Teacher"
       @assignment = Assignment.find_by_id(params[:assignment_id])
-      @list_students = []
       @course = Course.find_by_id(params[:course_id])
       @students = Student.all
 
+      #accesses the enrollment jointable and returns array of students taking the course
       @enrolled = Enrollment.where(course_id:params[:course_id])
       @enrolled_students = []
-      #assess the enrollment jointable and returns array of students taking the course
       @enrolled.each do |enroll|
         @enrolled_students.push(Student.where(id:enroll.student_id))
       end
     else
       redirect_to root_path
     end
-  end
-
-  def remove_student_from_course
-    @course = Course.find_by_id(params[:course_id])
-    @student = Student.find(params[:remove_enrollment][:student_id])
-    @enrollment = Enrollment.find_by(course_id:@course.id, student_id:@student.id)
-    Enrollment.delete(@enrollment)
-    redirect_to assignment_show_path
-  end
-
-  def add_student_to_course
-    @course = Course.find_by_id(params[:course_id])
-    @student_first = params[:enrollment][:student_picked].split(" ").first
-    @student_last = params[:enrollment][:student_picked].split(" ").last
-    @student = Student.find_by(first_name:@student_first, last_name:@student_last)
-    @enrollment = Enrollment.create(course_id:@course.id, student_id:@student.id)
-    redirect_to assignment_show_path
   end
 
   def create
@@ -61,10 +43,17 @@ class AssignmentsController < ApplicationController
     end
   end
 
-private
+  def add_grade_to_student
+    @course = Course.find(params[:course_id])
+    @assignment = Assignment.find(params[:assignment_id])
+    @student = Student.find(params[:add_grade][:student_id])
+    @add_grade = Grade.create(grade:params[:add_grade][:grade], assignment_id:@assignment.id, student_id:@student.id)
+    redirect_to assignment_show_path
+  end
 
-  def enrollment_params
-    params.require(:enrollment).permit(:course_id, :student_picked)
+private
+  def grades_params
+    params.require(:grade).permit(:grade, :assignment_id, :student_id)
   end
 
   def assignment_params

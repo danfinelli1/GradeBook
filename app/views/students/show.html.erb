@@ -1,10 +1,10 @@
 <div>
   Welcome, <%= @student.first_name %>!
 </div>
-Pick your courses:
-<select>
-<% @courses.each do |course|%>
-  <option><%=course.name%></option>
-  <%= course.name+course.number.to_s%>
+These are your courses!:
+<%@enrolled_course.each do |course|%>
+  <br>
+  <h5><%=course.name%> <br></h5>
+
+
 <%end%>
-</select>

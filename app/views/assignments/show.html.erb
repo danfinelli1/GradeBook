@@ -1,22 +1,32 @@
 <h1><%= @course.name%> </h1>
 <h5><%= @assignment.name%> </h5>
-<% @students.each do |student|%>
-  <% @list_students.push(student.first_name + " "+ student.last_name)%>
-<%end%>
-<p> THIS IS AN ACTIVE DOCUMENT </p>
-<%@enrolled_students.each do |student|%>
-  <%student.each do |g|%>
-    <%= form_for :remove_enrollment, url:"/course/#{@course.id}/assignment/#{@assignment.id}", method: "delete" do |t|%>
-      <%=g.first_name%> <br>
-      <%= t.hidden_field :course_id, :value => @course.id%>
-      <%= t.hidden_field :student_id, :value => g.id%>
-      <%= t.button 'Remove Student from Course', { :controller => :assignments, :action => 'remove_student_from_course'} %>
+
+<table>
+  <thead>
+      <tr>
+          <th data-field="id">Student ID</th>
+          <th data-field="name">Full Name</th>
+          <th data-field="grade">Grade</th>
+      </tr>
+    </thead>
+
+    <tbody>
+    <%@enrolled_students.each do |g|%>
+      <%g.each do |student|%>
+      <tr>
+        <td><%=student.id%></td>
+        <td><%=student.first_name%> <%=student.last_name%></td>
+
+        <td><%=form_for :add_grade, url: "/course/#{@course.id}/assignment/#{@assignment.id}/grade/#{student.id}" do |f| %>
+          <%=f.number_field :grade, :class => 'text_field', :step => 0.5, :placeholder => :grade%>
+          <%=f.hidden_field :assignment_id, :value => @assignment.id %>
+          <%=f.hidden_field :student_id, :value => student.id %>
+          <%=f.button"Add", { :controller => :assignments, :action => 'add_grade_to_student', :class => 'waves-effect waves-light btn' }%>
+        <%end%>
+      </td>
+
+      </tr>
+      <%end%>
     <%end%>
-  <%end%>
-<%end%>
-<br><br>Please select the students you want in this class!<br><br>
-<%= form_for :enrollment do |f|%>
-  <%= f.select :student_picked,  @list_students%>
-  <%= f.hidden_field :course_id, :value => @course.id%>
-<%= f.button"Add Student to Course", { :controller => :assignments, :action => :add_student_to_course } %>
-<%end%>
+    </tbody>
+  </table>

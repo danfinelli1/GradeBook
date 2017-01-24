@@ -18,3 +18,7 @@
  $secondary-color: color("blue", "base") !default;
  @import "materialize";
  @import "materialize/extras/nouislider";
+
+ body{
+   @extend .grey;
+ }
