@@ -7,7 +7,7 @@
       <tr>
           <th data-field="id">Student ID</th>
           <th data-field="name">Full Name</th>
-          <th data-field="grade">Grade</th>
+          <th data-field="grade" class='right' style="padding-right:200px;">Grade</th>
       </tr>
     </thead>
 
@@ -27,7 +27,9 @@
           <%end%>
           <%=f.hidden_field :assignment_id, :value => @assignment.id %>
           <%=f.hidden_field :student_id, :value => student.id %>
-          <%=f.button"Add", { :controller => :assignments, :action => 'add_grade_to_student', :class => 'waves-effect waves-light btn' }%>
+        </span>
+        <span>
+          <%=f.button"Submit Grade", { :controller => :assignments, :action => 'add_grade_to_student', :class => 'waves-effect waves-light btn' }%>
         <%end%></span>
       </td>
 
