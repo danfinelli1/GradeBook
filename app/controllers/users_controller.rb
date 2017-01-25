@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create(user_params)
+    UserMailer.welcome_email(@user).deliver_now
     login(@user)
     if @user.access_level == "Teacher"
       redirect_to new_teacher_path
