@@ -15,11 +15,10 @@ class StudentsController < ApplicationController
   end
 
   def show
+    @tot_grades = 0
     @enrolled_course = []
-    @assignments = []
     @user = User.find_by_id(current_user.id)
     @student = Student.find_by(user_id:current_user.id)
-    @courses = Course.all
     @enrollment = Enrollment.where(student_id:@student.id)
     @enrollment.each do |enroll|
       @enrolled_course.push(Course.find(enroll.course_id))
@@ -30,7 +29,6 @@ class StudentsController < ApplicationController
     @student = Student.find_by(user_id:current_user.id)
     @course = Course.find(params[:course_id])
     @assignments = Assignment.where(course_id:params[:course_id])
-
   end
 
   def edit

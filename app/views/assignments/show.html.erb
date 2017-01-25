@@ -19,17 +19,19 @@
         <%@student_grade = Grade.where(student_id:student.id, assignment_id:@assignment.id)%>
 
         <td><span class="right"><%=form_for :add_grade, url: "/course/#{@course.id}/assignment/#{@assignment.id}/grade/#{student.id}" do |f| %>
-          <%if @student_grade != nil%>
+          <%if @student_grade.last != nil && @student_grade.last.grade != nil%>
+            <%student.gpa =0 %>
+            <%student.gpa += @student_grade.last.grade%>
             <%=f.number_field :grade, :class => 'text_field', :step => 0.5, :value => @student_grade.last.grade, in: 0..100%>
           <%else%>
             <%=f.number_field :grade, :class => 'text_field', :step => 0.5, :value => 0%>
-          <%end%></span>
-          <span class="right">
+          <%end%>
           <%=f.hidden_field :assignment_id, :value => @assignment.id %>
           <%=f.hidden_field :student_id, :value => student.id %>
           <%=f.button"Add", { :controller => :assignments, :action => 'add_grade_to_student', :class => 'waves-effect waves-light btn' }%>
         <%end%></span>
       </td>
+
 
       </tr>
       <%end%>

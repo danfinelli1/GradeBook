@@ -12,9 +12,12 @@
   </thead>
   <tbody>
     <%@enrolled_course.each do |course|%>
+    <%@assignments = Assignment.where(course_id:course.id)%>
       <tr>
-        <td><%=link_to "#{course.name}", student_show_course_path({course_id:"#{course.id}", student_id:@student.id})%></td>
-        <td><%=@avg_grade%></td>
+        <td><h5><%=link_to "#{course.name}", student_show_course_path({course_id:"#{course.id}", student_id:@student.id})%><h6></td>
+        <td>
+        
+        </td>
       </tr>
       <%end%>
   </tbody>

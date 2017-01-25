@@ -47,6 +47,7 @@ class AssignmentsController < ApplicationController
     @course = Course.find(params[:course_id])
     @assignment = Assignment.find(params[:assignment_id])
     @student = Student.find(params[:add_grade][:student_id])
+    @student.update_attributes(gpa: @student.gpa.to_i + params[:add_grade][:grade].to_i)
     @add_grade = Grade.create(grade:params[:add_grade][:grade], assignment_id:@assignment.id, student_id:@student.id)
     redirect_to assignment_show_path(course_id:@course.id, assignment_id:@assignment.id)
   end
