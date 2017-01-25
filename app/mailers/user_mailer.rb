@@ -4,7 +4,7 @@ class UserMailer < ApplicationMailer
 
   def welcome_email(user)
    @user = user
-   @url  = 'http://localhost:3000/'
+   @url  = 'http://mighty-sands-39800.herokuapp.com/'
    mail(to: @user.email, subject: 'Welcome to GradeBook!')
   end
 end
