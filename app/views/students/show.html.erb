@@ -11,13 +11,11 @@
     </tr>
   </thead>
   <tbody>
-    <%@enrolled_course.each do |course|%>
-    <%@assignments = Assignment.where(course_id:course.id)%>
+    <%@enrollment.each do |enroll|%>
+    <%@assignments = Assignment.where(course_id:enroll.course_id)%>
       <tr>
-        <td><h5><%=link_to "#{course.name}", student_show_course_path({course_id:"#{course.id}", student_id:@student.id})%><h6></td>
-        <td>
-        
-        </td>
+        <td><h5><%=link_to "#{Course.find(enroll.course_id).name}", student_show_course_path({course_id:"#{enroll.course_id}", student_id:@student.id})%><h6></td>
+        <td><%=(enroll.tot_grade/@assignments.length).round(2)%></td>
       </tr>
       <%end%>
   </tbody>

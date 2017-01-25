@@ -6,20 +6,29 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo">GradeBook</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <% if current_user %>
+          <% if current_user.access_level == "Teacher" %>
+            <li><%= link_to "Profile", teacher_profile_path, class:"waves-effect waves-light" %></li>
+            <li><%= link_to "Log Out", logout_path, class:"waves-effect waves-light" %></li>
+          <% elsif current_user.access_level == "Student" %>
+            <li><%= link_to "Profile", student_profile_path, class:"waves-effect waves-light" %></li>
+            <li><%= link_to "Log Out", logout_path, class:"waves-effect waves-light" %></li>
+          <%end%>
+        <% else %>
+          <li><%= link_to "Create Account", new_user_path, class:"waves-effect waves-light" %></li>
+          <li><%= link_to "Log In", login_path, class:"waves-effect waves-light" %></li>
+        <% end %>
+        </ul>
+      </div>
+    </nav>
+
   </head>
   <body class="lighten-2">
-    <% if current_user %>
-      <% if current_user.access_level == "Teacher" %>
-        <%= link_to "Profile", teacher_profile_path, class:"waves-effect waves-light btn right" %>
-        <%= link_to "Log Out", logout_path, class:"waves-effect waves-light btn right" %>
-      <% elsif current_user.access_level == "Student" %>
-        <%= link_to "Profile", student_profile_path, class:"waves-effect waves-light btn right" %>
-        <%= link_to "Log Out", logout_path, class:"waves-effect waves-light btn right" %>
-      <%end%>
-    <% else %>
-      <%= link_to "Create Account", new_user_path, class:"waves-effect waves-light btn right" %>
-      <%= link_to "Log In", login_path, class:"waves-effect waves-light btn right" %>
-    <% end %>
+
     <br>
     <div class="container">
       <% flash.each do |name, msg| %>
