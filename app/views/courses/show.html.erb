@@ -26,7 +26,7 @@
   <%end%>
 </span>
 <span class = 'right'>
-  <h5>Please select the students you want in this class!</h6><br><br>
+  <h5>Select students to add to the class!</h6><br><br>
   <%= form_for :enrollment do |f|%>
   <div class="white">
     <%= f.select :student_picked, @list_students %>
