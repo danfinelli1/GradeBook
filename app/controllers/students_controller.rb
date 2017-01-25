@@ -15,7 +15,6 @@ class StudentsController < ApplicationController
   end
 
   def show
-    @tot_grades = 0
     @enrolled_course = []
     @user = User.find_by_id(current_user.id)
     @student = Student.find_by(user_id:current_user.id)
