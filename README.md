@@ -32,7 +32,7 @@ end
 
 ## Deployment
 
-Gradebook gave me some deployment issues but over not too many. Simply weirdest bug was a day before this project was due and deployment worked in the AM but not the PM. I got it to finally work and I believe it had something to do with old data in the database. Data that didn't have the proper attributes causing errors. Once I destroyed the database and re-migrated it seemed to have been fixed like magic.
+Gradebook gave me some heroku deployment issues but overall not too many. Simply weirdest bug was a day before this project was due and deployment worked in the AM but not the PM. I got it to finally work and I believe it had something to do with old data in the database. Data that didn't have the proper attributes causing errors? Once I destroyed the database and re-migrated it seemed to have been fixed like magic.
 
 ## Built With
 
@@ -44,7 +44,8 @@ Gradebook gave me some deployment issues but over not too many. Simply weirdest 
 
 ## Authors
 
-* **Daniel Finelli** - *Initial work* - [DanFinelli1](https://github.com/danfinelli1)
+* **Daniel Finelli**
+* [danfinelli1](https://github.com/danfinelli1)
 
 
 ## License
