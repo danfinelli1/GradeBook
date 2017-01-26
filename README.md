@@ -44,8 +44,7 @@ Gradebook gave me some heroku deployment issues but overall not too many. Simply
 
 ## Authors
 
-* **Daniel Finelli**
-* [danfinelli1](https://github.com/danfinelli1)
+ **Daniel Finelli** -- [danfinelli1](https://github.com/danfinelli1)
 
 
 ## License
