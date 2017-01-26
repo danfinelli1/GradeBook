@@ -31,6 +31,9 @@ Rails.application.routes.draw do
   get '/course/new', to: 'courses#new', as: 'new_course'
   post '/course', to: 'courses#create'
   get '/course/:id', to: 'courses#show', as: 'course_show'
+  get '/course/:id/edit', to: 'courses#edit', as: 'edit_course'
+  put '/course/:id/edit', to: 'courses#update'
+  delete '/course/:id/destroy', to: 'courses#destroy', as: 'delete_course'
   delete '/course/:id', to: 'courses#remove_student_from_course', as: 'destroy_enrollment'
   post '/course/:id', to: 'courses#add_student_to_course', as: 'create_enrollment'
 
@@ -38,6 +41,9 @@ Rails.application.routes.draw do
   get '/course/:id/assignment/new', to: 'assignments#new', as: 'new_assignment'
   post '/assignment', to: 'assignments#create'
   get '/course/:course_id/assignment/:assignment_id', to: 'assignments#show', as: 'assignment_show'
+  get '/course/:course_id/assignment/:assignment_id/edit', to: 'assignments#edit', as: 'edit_assignment'
+  put '/course/:course_id/assignment/:assignment_id/edit', to: 'assignments#update'
+  delete '/course/:course_id/assignment/:assignment_id/destroy', to: 'assignments#destroy', as: 'delete_assignment'
 
 #grade routes
   post '/course/:course_id/assignment/:assignment_id/grade/:student_id', to: 'assignments#add_grade_to_student', as: 'grade_assignment'

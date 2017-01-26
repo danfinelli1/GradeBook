@@ -32,7 +32,34 @@ class CoursesController < ApplicationController
     else
       redirect_to root_path
     end
+  end
 
+  def edit
+    @course = Course.find_by_id(params[:id])
+    @teacher = Teacher.find_by(user_id:current_user.id)
+  end
+
+  def update
+    if current_user.access_level == "Teacher"
+      updated_course = Course.find_by_id(params[:id])
+      if updated_course.update(course_params)
+          redirect_to course_show_path(params[:id])
+      else
+          redirect_to edit_course_path
+      end
+    else
+      redirect_to student_profile_path
+    end
+  end
+
+  def destroy
+    if current_user.access_level == "Teacher"
+      deleted_course = Course.find_by_id(params[:id])
+      Course.destroy(deleted_course)
+      redirect_to teacher_profile_path
+    else
+      redirect_to student_profile_path
+    end
   end
 
   def remove_student_from_course

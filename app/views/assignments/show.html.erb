@@ -1,6 +1,12 @@
 <h1><%= @course.name%> </h1>
 <h5><%= @assignment.name%> </h5>
 
+<br><br>
+<%= link_to("Edit Assignment", edit_assignment_path({ course_id:@course.id, assignment_id:@assignment.id }), :class => "waves-effect waves-light btn") %>
+<%= link_to("Delete Assignment", delete_assignment_path({ course_id:@course.id, assignment_id:@assignment.id }), :method => 'delete' , :class => "waves-effect waves-light btn red", data: { confirm: "Are you sure you want to delete #{@assignment.name}?" })%>
+
+
+
 
 <table class="highlight">
   <thead>

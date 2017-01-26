@@ -1,0 +1,9 @@
+<%= form_for @assignment, url: edit_assignment_path({ course_id:@course.id, assignment_id:@assignment.id }) ,method: "put" do |f| %>
+  <div>
+    <%= f.text_field :name, placeholder: "Assignment Name" %>
+  </div>
+  <div>
+    <%= f.hidden_field :course_id, :value => @course.id %>
+  </div>
+  <%= f.submit "Edit Assignment!", class:"waves-effect waves-light btn" %>
+<% end %>

@@ -43,6 +43,35 @@ class AssignmentsController < ApplicationController
     end
   end
 
+  def edit
+    @course = Course.find_by_id(params[:course_id])
+    @assignment = Assignment.find_by_id(params[:assignment_id])
+    @teacher = Teacher.find_by(user_id:current_user.id)
+  end
+
+  def update
+    if current_user.access_level == "Teacher"
+      updated_assignment = Assignment.find_by_id(params[:assignment_id])
+      if updated_assignment.update(assignment_params)
+          redirect_to assignment_show_path(params[:course_id], params[:assignment_id])
+      else
+          redirect_to edit_assigment_path
+      end
+    else
+      redirect_to student_profile_path
+    end
+  end
+
+  def destroy
+    if current_user.access_level == "Teacher"
+      deleted_assignment = Assignment.find_by_id(params[:assignment_id])
+      Assignment.destroy(deleted_assignment)
+      redirect_to teacher_profile_path
+    else
+      redirect_to student_profile_path
+    end
+  end
+
   def add_grade_to_student
     @course = Course.find(params[:course_id])
     @assignment = Assignment.find(params[:assignment_id])
