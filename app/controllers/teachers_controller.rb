@@ -6,6 +6,7 @@ class TeachersController < ApplicationController
 
   def create
     @teacher = Teacher.create(teacher_params)
+    # TODO: Do a check for errors and send a flash message if there are errors
     redirect_to teacher_profile_path
   end
 
