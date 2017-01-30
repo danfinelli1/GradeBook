@@ -11,6 +11,7 @@ class StudentsController < ApplicationController
 
   def create
     @student = Student.create(student_params)
+    # TODO: Do a check for errors and send a flash message if there are errors
     redirect_to student_profile_path
   end
 
@@ -18,6 +19,7 @@ class StudentsController < ApplicationController
     @enrolled_course = []
     @user = User.find_by_id(current_user.id)
     @student = Student.find_by(user_id:current_user.id)
+
     @enrollment = Enrollment.where(student_id:@student.id)
     @enrollment.each do |enroll|
       @enrolled_course.push(Course.find(enroll.course_id))
@@ -38,6 +40,7 @@ class StudentsController < ApplicationController
     @student = Student.find_by_id(current_user.id)
     @student = Student.find_by(user_id:current_user.id)
     @student.update_attributes(student_params)
+    # TODO: Do a check for errors and send a flash message if there are errors
     redirect_to student_profile_path
   end
 

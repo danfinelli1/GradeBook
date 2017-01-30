@@ -14,6 +14,7 @@ class CoursesController < ApplicationController
 
   def create
     @course = Course.create(course_params)
+    # TODO: Do a check for errors and send a flash message if there are errors
     redirect_to teacher_profile_path
   end
 
@@ -23,6 +24,7 @@ class CoursesController < ApplicationController
       @course = Course.find_by_id(params[:id])
       @assignments = Assignment.where(course_id:@course.id)
       @students = Student.all
+      # TODO: Can you roll lines 28 to 32 into a method helper and put it in yoru model or model helper file? The ideal is to have a very small controller codebase and a bigger model codebase. This makes reading the controller faster and easier.
       #accesses the enrollment jointable and returns array of students taking the course
       @enrolled = Enrollment.where(course_id:params[:id])
       @enrolled_students = []
@@ -45,6 +47,7 @@ class CoursesController < ApplicationController
       if updated_course.update(course_params)
           redirect_to course_show_path(params[:id])
       else
+          # TODO: If there is an error include flash messages
           redirect_to edit_course_path
       end
     else

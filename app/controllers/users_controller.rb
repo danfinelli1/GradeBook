@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create(user_params)
+    # TODO: Do a check for errors and send a flash message if there are errors
     UserMailer.welcome_email(@user).deliver_now
     login(@user)
     if @user.access_level == "Teacher"

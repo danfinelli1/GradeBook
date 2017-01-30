@@ -12,6 +12,7 @@
   </thead>
   <tbody>
     <%@enrollment.each do |enroll|%>
+    <!-- TODO: NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO -->
     <%@assignments = Assignment.where(course_id:enroll.course_id)%>
       <tr>
         <td><h5><%=link_to "#{Course.find(enroll.course_id).name}", student_show_course_path({course_id:"#{enroll.course_id}", student_id:@student.id})%><h6></td>

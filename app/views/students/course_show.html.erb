@@ -9,6 +9,7 @@
   <tbody>
 <%@assignments.each do |assignment|%>
     <tr>
+      <!-- TODO: NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO -->
       <%@grade = Grade.where(assignment_id:assignment.id, student_id:@student.id)%>
       <td><%=assignment.name%></td>
       <%if @grade.last != nil && @grade.last.grade !=nil%>
